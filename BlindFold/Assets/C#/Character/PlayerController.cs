@@ -14,14 +14,13 @@ namespace Survive.PlayerControl
         [SerializeField] private float UpperLimit = -40f;
         [SerializeField] private float BottomLimit = 70f;
         [SerializeField] private float MouseSensitivity = 21.9f;
-        [SerializeField, Range(10, 500)] private float JumpFactor = 260f;
         [SerializeField] private float Dis2Ground = 0.8f;
         [SerializeField] private LayerMask GroundCheck;
         [SerializeField] private float AirResistance = 0.8f;
         private Rigidbody _playerRigidbody;
         private InputManager _inputManager;
         private Animator _animator;
-        private bool _grounded = false;
+        private bool _grounded = true;
         private bool _hasAnimator;
         private int _xVelHash;
         private int _yVelHash;
@@ -48,15 +47,13 @@ namespace Survive.PlayerControl
             _xVelHash = Animator.StringToHash("X_Velocity");
             _yVelHash = Animator.StringToHash("Y_Velocity");
             _zVelHash = Animator.StringToHash("Z_Velocity");
-            _jumpHash = Animator.StringToHash("Jump");
             _groundHash = Animator.StringToHash("Grounded");
             _fallingHash = Animator.StringToHash("Falling");
-            _crouchHash = Animator.StringToHash("Crouch");
+
         }
 
         private void FixedUpdate()
         {
-            SampleGround();
             Move();
         }
         private void LateUpdate()
@@ -109,24 +106,6 @@ namespace Survive.PlayerControl
             _playerRigidbody.MoveRotation(_playerRigidbody.rotation * Quaternion.Euler(0, Mouse_X * MouseSensitivity * Time.smoothDeltaTime, 0));
         }
 
-        private void SampleGround()
-        {
-            if (!_hasAnimator) return;
-
-            RaycastHit hitInfo;
-            if (Physics.Raycast(_playerRigidbody.worldCenterOfMass, Vector3.down, out hitInfo, Dis2Ground + 0.1f, GroundCheck))
-            {
-                //Grounded
-                _grounded = true;
-                SetAnimationGrounding();
-                return;
-            }
-            //Falling
-            _grounded = false;
-            _animator.SetFloat(_zVelHash, _playerRigidbody.linearVelocity.y);
-            SetAnimationGrounding();
-            return;
-        }
 
         private void SetAnimationGrounding()
         {

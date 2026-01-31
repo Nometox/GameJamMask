@@ -4,14 +4,16 @@ using Survive.Manager;
 public class blindFold : MonoBehaviour
 {
     private InputManager _inputManager;
-    
-    [SerializeField] private GameObject blindMan; 
+    public Animator animator;
+    public bool isBlindfolded = true;
+
+    [SerializeField] private GameObject blindMan;
     [SerializeField] private GameObject Blood;
-    
+
     private bool _isPressed;
 
     void Start() => _inputManager = GameObject.FindAnyObjectByType<InputManager>();
-    
+
     void Update()
     {
         if (_inputManager?.BlindFold == true && !_isPressed)
@@ -28,11 +30,12 @@ public class blindFold : MonoBehaviour
 
     void toggleBlindfold()
     {
-        blindMan.SetActive(!blindMan.activeSelf);
-    } 
+        isBlindfolded = !isBlindfolded;
+        animator.SetBool("isBlindfolded", isBlindfolded);
+    }
 
     void toggleBlood()
     {
-        Blood.SetActive(!blindMan.activeSelf);
+        Blood.SetActive(isBlindfolded);
     }
 }

@@ -14,8 +14,6 @@ namespace Survive.PlayerControl
         [SerializeField] private float UpperLimit = -40f;
         [SerializeField] private float BottomLimit = 70f;
         [SerializeField] private float MouseSensitivity = 21.9f;
-        [SerializeField] private float Dis2Ground = 0.8f;
-        [SerializeField] private LayerMask GroundCheck;
         [SerializeField] private float AirResistance = 0.8f;
         private Rigidbody _playerRigidbody;
         private InputManager _inputManager;
@@ -24,11 +22,8 @@ namespace Survive.PlayerControl
         private bool _hasAnimator;
         private int _xVelHash;
         private int _yVelHash;
-        private int _jumpHash;
         private int _groundHash;
         private int _fallingHash;
-        private int _zVelHash;
-        private int _crouchHash;
         private float _xRotation;
 
         private const float _walkSpeed = 2f;
@@ -46,7 +41,6 @@ namespace Survive.PlayerControl
 
             _xVelHash = Animator.StringToHash("X_Velocity");
             _yVelHash = Animator.StringToHash("Y_Velocity");
-            _zVelHash = Animator.StringToHash("Z_Velocity");
             _groundHash = Animator.StringToHash("Grounded");
             _fallingHash = Animator.StringToHash("Falling");
 

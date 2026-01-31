@@ -1,11 +1,14 @@
 using UnityEngine;
 using Survive.Manager;
+using System.Collections;
 
 public class blindFold : MonoBehaviour
 {
     private InputManager _inputManager;
     public Animator animator;
-    public bool isBlindfolded = true;
+    private bool _isAnimating;
+
+    public bool isBlindfolded = false;
 
     [SerializeField] private GameObject blindMan;
     [SerializeField] private GameObject Blood;
@@ -16,10 +19,11 @@ public class blindFold : MonoBehaviour
 
     void Update()
     {
+        if (_isAnimating) return;
+
         if (_inputManager?.BlindFold == true && !_isPressed)
         {
-            toggleBlindfold();
-            toggleBlood();
+            StartCoroutine(PlayBlindfoldAnimation());
             _isPressed = true;
         }
         else if (_inputManager?.BlindFold == false)
@@ -28,6 +32,19 @@ public class blindFold : MonoBehaviour
         }
     }
 
+    IEnumerator PlayBlindfoldAnimation()
+    {
+        _isAnimating = true;
+
+        toggleBlindfold();
+        toggleBlood();
+
+        yield return new WaitForSeconds(
+            animator.GetCurrentAnimatorStateInfo(0).length
+        );
+
+        _isAnimating = false;
+    }
     void toggleBlindfold()
     {
         isBlindfolded = !isBlindfolded;

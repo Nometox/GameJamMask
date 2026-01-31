@@ -11,6 +11,7 @@ namespace Survive.PlayerControl
         [SerializeField] private float AnimBlendSpeed = 8.9f;
         [SerializeField] private Transform CameraRoot;
         [SerializeField] private Transform Camera;
+        public Camera playerCamera;
         [SerializeField] private float UpperLimit = -40f;
         [SerializeField] private float BottomLimit = 70f;
         [SerializeField] private float MouseSensitivity = 21.9f;
@@ -30,14 +31,18 @@ namespace Survive.PlayerControl
         private const float _runSpeed = 6f;
         private Vector2 _currentVelocity;
 
-
+        [Header("Interaction")]
+        [SerializeField] private Vector3 interactionRayPoint = default;
+        [SerializeField] private float interactionDistance = default;
+        [SerializeField] LayerMask interactionLayer = default;
+        private Interactable currentInteractble;
 
         private void Start()
         {
             _hasAnimator = TryGetComponent<Animator>(out _animator);
             _playerRigidbody = GetComponent<Rigidbody>();
             _inputManager = GetComponent<InputManager>();
-
+            playerCamera = GetComponentInChildren<Camera>();
 
             _xVelHash = Animator.StringToHash("X_Velocity");
             _yVelHash = Animator.StringToHash("Y_Velocity");
@@ -50,11 +55,45 @@ namespace Survive.PlayerControl
         {
             Move();
         }
+        void Update()
+        {
+            HandleInteractionCheck();
+            HandleInteractionInput();
+        }
         private void LateUpdate()
         {
             CamMovements();
         }
 
+
+        private void HandleInteractionCheck()
+        {
+            if (Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance))
+            {
+                if (hit.collider.gameObject.layer == 7 && (currentInteractble == null || hit.collider.gameObject.GetInstanceID() != currentInteractble.GetInstanceID()))
+                {
+                    hit.collider.TryGetComponent(out currentInteractble);
+
+                    if (currentInteractble)
+                    {
+                        currentInteractble.OnFocus();
+                    }
+                }
+            }
+            else if (currentInteractble)
+            {
+                currentInteractble.OnLoseFocus();
+                currentInteractble = null;
+            }
+        }
+
+        private void HandleInteractionInput()
+        {
+            if (_inputManager.Interact && Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance, interactionLayer))
+            {
+                currentInteractble.OnInteract();
+            }
+        }
         private void Move()
         {
             if (!_hasAnimator) return;

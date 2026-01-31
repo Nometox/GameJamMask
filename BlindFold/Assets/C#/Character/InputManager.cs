@@ -14,11 +14,13 @@ namespace Survive.Manager
         public bool BlindFold { get; private set; }
         public bool Jump { get; private set; }
         public bool Crouch { get; private set; }
+        public bool Interact { get; private set; }
 
         private InputActionMap _currentMap;
         private InputAction _moveAction;
         private InputAction _lookAction;
         private InputAction _BlindFoldAction;
+        private InputAction _InteractAction;
 
 
         private void Awake()
@@ -28,16 +30,19 @@ namespace Survive.Manager
             _moveAction = _currentMap.FindAction("Move");
             _lookAction = _currentMap.FindAction("Look");
             _BlindFoldAction = _currentMap.FindAction("BlindFold");
+            _InteractAction = _currentMap.FindAction("Interact");
 
 
             _moveAction.performed += onMove;
             _lookAction.performed += onLook;
             _BlindFoldAction.performed += onBlindFold;
+            _InteractAction.performed += onInteract;
 
 
             _moveAction.canceled += onMove;
             _lookAction.canceled += onLook;
             _BlindFoldAction.canceled += onBlindFold;
+            _InteractAction.canceled += onInteract;
 
         }
 
@@ -58,6 +63,10 @@ namespace Survive.Manager
         private void onBlindFold(InputAction.CallbackContext context)
         {
             BlindFold = context.ReadValueAsButton();
+        }
+        private void onInteract(InputAction.CallbackContext context)
+        {
+            Interact = context.ReadValueAsButton();
         }
 
         private void OnEnable()

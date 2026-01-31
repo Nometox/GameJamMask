@@ -16,6 +16,10 @@ namespace Survive.PlayerControl
         [SerializeField] private float BottomLimit = 70f;
         [SerializeField] private float MouseSensitivity = 21.9f;
         [SerializeField] private float AirResistance = 0.8f;
+
+
+        public AudioSource walkSound;
+
         private Rigidbody _playerRigidbody;
         private InputManager _inputManager;
         private Animator _animator;
@@ -27,7 +31,7 @@ namespace Survive.PlayerControl
         private int _fallingHash;
         private float _xRotation;
 
-        private const float _walkSpeed = 2f;
+        private const float _walkSpeed = 1f;
         private const float _runSpeed = 6f;
         private Vector2 _currentVelocity;
 
@@ -99,8 +103,24 @@ namespace Survive.PlayerControl
             if (!_hasAnimator) return;
 
             float targetSpeed = _walkSpeed;
-            if (_inputManager.Crouch) targetSpeed = 1.5f;
-            if (_inputManager.Move == Vector2.zero) targetSpeed = 0;
+            if (_inputManager.Move == Vector2.zero)
+            {
+                targetSpeed = 0;
+
+                if (walkSound.isPlaying)
+                {
+                    walkSound.Stop();
+                }
+            }
+            else
+            {
+                targetSpeed = _walkSpeed;
+
+                if (!walkSound.isPlaying)
+                {
+                    walkSound.Play();
+                }
+            }
 
             if (_grounded)
             {

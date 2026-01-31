@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource audioSource;
-    public AudioClip introVoice;
     public AudioClip deniedSound;
 
 
@@ -32,7 +32,6 @@ public class GameManager : MonoBehaviour
     {
         CursorShow(false);
         UpdateObjective();
-        audioSource.PlayOneShot(introVoice);
     }
 
 
@@ -84,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     public void StartCutscene()
     {
-        // here the last cutscene end
+        SceneManager.LoadScene("Game");
     }
 
 

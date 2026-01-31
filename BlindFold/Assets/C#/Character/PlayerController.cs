@@ -31,7 +31,7 @@ namespace Survive.PlayerControl
         private int _fallingHash;
         private float _xRotation;
 
-        private const float _walkSpeed = 1f;
+        private const float _walkSpeed = 2f;
         private const float _runSpeed = 6f;
         private Vector2 _currentVelocity;
 

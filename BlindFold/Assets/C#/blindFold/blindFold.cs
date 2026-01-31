@@ -14,7 +14,6 @@ public class blindFold : MonoBehaviour
     [SerializeField] private GameObject Blood;
 
     private bool _isPressed;
-
     void Start()
     {
         _inputManager = GameObject.FindAnyObjectByType<InputManager>();
@@ -54,6 +53,7 @@ public class blindFold : MonoBehaviour
     {
         isBlindfolded = !isBlindfolded;
         animator.SetBool("isBlindfolded", isBlindfolded);
+        GameManager.Instance.SetBlindfold(isBlindfolded);
     }
 
     void toggleBlood()

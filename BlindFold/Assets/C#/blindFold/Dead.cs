@@ -28,9 +28,9 @@ public class Dead : MonoBehaviour
     void GameOver()
     {
         Debug.Log("Game Verloren! Het bloed was te lang actief.");
-        
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
+
+        SceneManager.LoadScene("GameOver");
+
         // SceneManager.LoadScene("GameOverScene");
     }
 }

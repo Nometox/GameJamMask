@@ -19,6 +19,14 @@ public class GameManager : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip deniedSound;
 
+    public bool IsBlindfolded { get; private set; }
+
+    public void SetBlindfold(bool value)
+    {
+        IsBlindfolded = value;
+    }
+
+
 
     private void Awake()
     {

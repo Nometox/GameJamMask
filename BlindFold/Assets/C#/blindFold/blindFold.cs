@@ -15,7 +15,12 @@ public class blindFold : MonoBehaviour
 
     private bool _isPressed;
 
-    void Start() => _inputManager = GameObject.FindAnyObjectByType<InputManager>();
+    void Start()
+    {
+        _inputManager = GameObject.FindAnyObjectByType<InputManager>();
+        animator.SetBool("isBlindfolded", isBlindfolded);
+        Blood.SetActive(isBlindfolded);
+    }
 
     void Update()
     {

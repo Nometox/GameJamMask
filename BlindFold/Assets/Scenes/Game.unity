@@ -6457,6 +6457,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   InteractionText: {fileID: 944555391}
   ObjectiveText: {fileID: 2026130141}
+  cutsceneCam: {fileID: 0}
+  playerCam: {fileID: 0}
   totalFuses: 3
   audioSource: {fileID: 3510018127225926764}
   deniedSound: {fileID: 0}
@@ -24650,7 +24652,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -0.000061035156, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 138.2, y: 28.6}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2026130141
 MonoBehaviour:
@@ -24672,10 +24674,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: 'Find Fusion
+
+'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5add5280e0763cef2a963d40bb9004d8, type: 2}
+  m_sharedMaterial: {fileID: -3199383767616578270, guid: 5add5280e0763cef2a963d40bb9004d8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

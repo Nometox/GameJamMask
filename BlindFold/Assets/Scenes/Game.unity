@@ -23,9 +23,9 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.2
   m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SubtractiveShadowColor: {r: 0, g: 0, b: 0, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
@@ -1550,7 +1550,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2589,6 +2589,7 @@ GameObject:
   - component: {fileID: 190039325}
   - component: {fileID: 190039324}
   - component: {fileID: 190039323}
+  - component: {fileID: 190039327}
   m_Layer: 0
   m_Name: LightBulb (6)
   m_TagString: Untagged
@@ -2691,6 +2692,19 @@ Transform:
   - {fileID: 970195246}
   m_Father: {fileID: 1912725065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &190039327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190039322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6397c0a2c77904f90b9868cfbaa701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
+  lightSource: {fileID: 970195248}
 --- !u!1001 &200071876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3860,7 +3874,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -4812,9 +4826,9 @@ Light:
   m_GameObject: {fileID: 410087039}
   m_Enabled: 1
   serializedVersion: 12
-  m_Type: 3
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Type: 1
+  m_Color: {r: 0.14716971, g: 0.14716971, b: 0.14716971, a: 1}
+  m_Intensity: 0.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4853,12 +4867,12 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 5000
-  m_UseColorTemperature: 1
+  m_ColorTemperature: 4126
+  m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
@@ -6421,6 +6435,7 @@ GameObject:
   - component: {fileID: 543778330}
   - component: {fileID: 543778329}
   - component: {fileID: 543778331}
+  - component: {fileID: 543778332}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6476,7 +6491,31 @@ MonoBehaviour:
   maxTimeBetweenEvents: 25
   heartbeatSource: {fileID: 8837928416065969179}
   heartbeatDuration: 6
-  postProcessVolume: {fileID: 832575518}
+  footstepAudioSource: {fileID: 8837928416065969179}
+  footstepSounds:
+  - {fileID: 8300000, guid: 329ee2764bfa71c46b0cd0dcaf7771c4, type: 3}
+  - {fileID: 8300000, guid: f682478fa2b8f8842874f1fd5a95cba1, type: 3}
+  - {fileID: 8300000, guid: 3df90a4b043c76c40aa25870304b0b67, type: 3}
+  idleTimeBeforeFootsteps: 7
+  timeAfterFootstepsBeforeDeath: 5
+--- !u!114 &543778332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543778328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7257a17869c92fc4284a338fbd8e879d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HorrorManager
+  jumpscares:
+  - {fileID: 785583725}
+  scareSounds:
+  - {fileID: 8300000, guid: 1e61e35c7a77f35438a54aff199eec73, type: 3}
+  audioSource: {fileID: 6064615278160476052}
+  scareDuration: 1.2
 --- !u!4 &544618429 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6485952337757626786, guid: a9a04f9e82a88594da2e378aba6e10bd, type: 3}
@@ -6556,6 +6595,7 @@ GameObject:
   - component: {fileID: 558122612}
   - component: {fileID: 558122611}
   - component: {fileID: 558122610}
+  - component: {fileID: 558122614}
   m_Layer: 0
   m_Name: LightBulb (2)
   m_TagString: Untagged
@@ -6658,6 +6698,19 @@ Transform:
   - {fileID: 1279769236}
   m_Father: {fileID: 1912725065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &558122614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558122609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6397c0a2c77904f90b9868cfbaa701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
+  lightSource: {fileID: 1279769238}
 --- !u!1001 &578942339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9357,6 +9410,78 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &785583725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 785583726}
+  - component: {fileID: 785583728}
+  - component: {fileID: 785583727}
+  m_Layer: 5
+  m_Name: Screamer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &785583726
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785583725}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 948724771}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.00012207031, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &785583727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785583725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 2800000, guid: cb564f6dd3afbee439782e8919a06db6, type: 3}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &785583728
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785583725}
+  m_CullTransparentMesh: 1
 --- !u!1001 &786200421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10054,6 +10179,7 @@ GameObject:
   - component: {fileID: 835332723}
   - component: {fileID: 835332722}
   - component: {fileID: 835332721}
+  - component: {fileID: 835332725}
   m_Layer: 0
   m_Name: LightBulb (9)
   m_TagString: Untagged
@@ -10156,6 +10282,19 @@ Transform:
   - {fileID: 1690928794}
   m_Father: {fileID: 1912725065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &835332725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835332720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6397c0a2c77904f90b9868cfbaa701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
+  lightSource: {fileID: 1690928796}
 --- !u!4 &838061748 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8857496041097200486, guid: 3eee8ed9c9081f149a546a3b2145157f, type: 3}
@@ -10834,6 +10973,7 @@ GameObject:
   - component: {fileID: 921737392}
   - component: {fileID: 921737391}
   - component: {fileID: 921737390}
+  - component: {fileID: 921737394}
   m_Layer: 0
   m_Name: LightBulb (8)
   m_TagString: Untagged
@@ -10936,6 +11076,19 @@ Transform:
   - {fileID: 1443474858}
   m_Father: {fileID: 1912725065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &921737394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921737389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6397c0a2c77904f90b9868cfbaa701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
+  lightSource: {fileID: 1443474860}
 --- !u!4 &922753016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7609193510580147552, guid: 930b2b6c70bb2ee4a8c39ef57c51ed02, type: 3}
@@ -11018,7 +11171,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -11422,6 +11575,7 @@ RectTransform:
   - {fileID: 690312439}
   - {fileID: 944555390}
   - {fileID: 2026130140}
+  - {fileID: 785583726}
   m_Father: {fileID: 1092496984}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -11936,7 +12090,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -12570,6 +12724,7 @@ GameObject:
   - component: {fileID: 1011619424}
   - component: {fileID: 1011619423}
   - component: {fileID: 1011619422}
+  - component: {fileID: 1011619426}
   m_Layer: 0
   m_Name: LightBulb (7)
   m_TagString: Untagged
@@ -12672,6 +12827,19 @@ Transform:
   - {fileID: 698515420}
   m_Father: {fileID: 1912725065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1011619426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011619421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6397c0a2c77904f90b9868cfbaa701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
+  lightSource: {fileID: 698515422}
 --- !u!1001 &1012269610
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15977,7 +16145,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -16585,6 +16753,7 @@ GameObject:
   - component: {fileID: 1317639862}
   - component: {fileID: 1317639861}
   - component: {fileID: 1317639860}
+  - component: {fileID: 1317639864}
   m_Layer: 0
   m_Name: LightBulb (4)
   m_TagString: Untagged
@@ -16687,6 +16856,19 @@ Transform:
   - {fileID: 304848834}
   m_Father: {fileID: 1912725065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1317639864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317639859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6397c0a2c77904f90b9868cfbaa701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
+  lightSource: {fileID: 304848836}
 --- !u!4 &1319280845 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8857496041097200486, guid: 3eee8ed9c9081f149a546a3b2145157f, type: 3}
@@ -17965,7 +18147,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -20763,7 +20945,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -21313,6 +21495,7 @@ GameObject:
   - component: {fileID: 1773640751}
   - component: {fileID: 1773640750}
   - component: {fileID: 1773640749}
+  - component: {fileID: 1773640753}
   m_Layer: 0
   m_Name: LightBulb (5)
   m_TagString: Untagged
@@ -21415,6 +21598,19 @@ Transform:
   - {fileID: 927736164}
   m_Father: {fileID: 1912725065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1773640753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1773640748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6397c0a2c77904f90b9868cfbaa701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
+  lightSource: {fileID: 927736166}
 --- !u!1001 &1776124591
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22107,6 +22303,7 @@ GameObject:
   - component: {fileID: 1851502680}
   - component: {fileID: 1851502679}
   - component: {fileID: 1851502678}
+  - component: {fileID: 1851502682}
   m_Layer: 0
   m_Name: LightBulb
   m_TagString: Untagged
@@ -22209,6 +22406,19 @@ Transform:
   - {fileID: 102337558}
   m_Father: {fileID: 1912725065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1851502682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851502677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6397c0a2c77904f90b9868cfbaa701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
+  lightSource: {fileID: 102337560}
 --- !u!1001 &1856553201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27107,6 +27317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6064615278160476051}
+  - component: {fileID: 6064615278160476052}
   m_Layer: 0
   m_Name: mixamorig1:Spine2
   m_TagString: Untagged
@@ -30160,6 +30371,103 @@ Transform:
   - {fileID: 4722291729045699379}
   m_Father: {fileID: 8816121422100720685}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &6064615278160476052
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659397377102070116}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.015
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6122685899162251219
 GameObject:
   m_ObjectHideFlags: 0
@@ -33153,9 +33461,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 7638998a16146454994df8ecc7f805dc, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2e9bd9cde73df0c4c9bc1dd09a5ba0ce, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.461
+  m_Volume: 0.534
   m_Pitch: 1
   Loop: 1
   Mute: 0

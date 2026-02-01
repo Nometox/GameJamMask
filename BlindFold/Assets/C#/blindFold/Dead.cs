@@ -29,8 +29,7 @@ public class Dead : MonoBehaviour
     {
         Debug.Log("Game Verloren! Het bloed was te lang actief.");
 
-        SceneManager.LoadScene("GameOver");
+        HorrorManager.Instance.PlayRandomScare();
 
-        // SceneManager.LoadScene("GameOverScene");
     }
 }

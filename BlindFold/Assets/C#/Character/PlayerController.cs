@@ -40,9 +40,10 @@ namespace Survive.PlayerControl
         [SerializeField] private float interactionDistance = default;
         [SerializeField] LayerMask interactionLayer = default;
         private Interactable currentInteractble;
-
         private void Start()
         {
+            CursorShow(false);
+
             _hasAnimator = TryGetComponent<Animator>(out _animator);
             _playerRigidbody = GetComponent<Rigidbody>();
             _inputManager = GetComponent<InputManager>();
@@ -69,7 +70,11 @@ namespace Survive.PlayerControl
             CamMovements();
         }
 
-
+        public void CursorShow(bool On)
+        {
+            Cursor.lockState = On ? CursorLockMode.Confined : CursorLockMode.Locked;
+            Cursor.visible = On;
+        }
         private void HandleInteractionCheck()
         {
             if (Physics.Raycast(playerCamera.ViewportPointToRay(interactionRayPoint), out RaycastHit hit, interactionDistance))
@@ -106,6 +111,7 @@ namespace Survive.PlayerControl
             if (_inputManager.Move == Vector2.zero)
             {
                 targetSpeed = 0;
+                GameManager.Instance.SetPlayerMoving(false);
 
                 if (walkSound.isPlaying)
                 {
@@ -115,7 +121,7 @@ namespace Survive.PlayerControl
             else
             {
                 targetSpeed = _walkSpeed;
-
+                GameManager.Instance.SetPlayerMoving(true);
                 if (!walkSound.isPlaying)
                 {
                     walkSound.Play();

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Audio")]
     public AudioSource audioSource;
+    public bool PlayerMoving { get; private set; }
     public AudioClip deniedSound;
 
     public bool IsBlindfolded { get; private set; }
@@ -24,6 +25,11 @@ public class GameManager : MonoBehaviour
     public void SetBlindfold(bool value)
     {
         IsBlindfolded = value;
+    }
+
+    public void SetPlayerMoving(bool value)
+    {
+        PlayerMoving = value;
     }
 
 
@@ -38,7 +44,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        CursorShow(false);
         UpdateObjective();
     }
 
@@ -92,12 +97,5 @@ public class GameManager : MonoBehaviour
     public void StartCutscene()
     {
         SceneManager.LoadScene("Game");
-    }
-
-
-    public void CursorShow(bool On)
-    {
-        Cursor.lockState = On ? CursorLockMode.Confined : CursorLockMode.Locked;
-        Cursor.visible = On;
     }
 }

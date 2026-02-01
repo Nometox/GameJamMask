@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour
 
     public bool IsCutscenePlaying { get; private set; }
 
-
     [Header("Fuses")]
     public int totalFuses = 3;
     private int collectedFuses = 0;
@@ -24,6 +23,13 @@ public class GameManager : MonoBehaviour
     public AudioSource audioSource;
     public bool PlayerMoving { get; private set; }
     public AudioClip deniedSound;
+
+    [Header("objectiveText")]
+    public float ObjectiveTextTime = 3f;
+
+    [Header("Inventory UI")]
+    public GameObject fuseIconPrefab; 
+    public Transform inventoryParent; 
 
     public bool IsBlindfolded { get; private set; }
 
@@ -36,8 +42,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerMoving = value;
     }
-
-
 
     private void Awake()
     {
@@ -52,10 +56,10 @@ public class GameManager : MonoBehaviour
         UpdateObjective();
     }
 
-
     public void CollectFuse()
     {
         collectedFuses++;
+        Instantiate(fuseIconPrefab, inventoryParent);
         InteractionTextUIChange("");
         UpdateObjective();
     }
@@ -72,11 +76,11 @@ public class GameManager : MonoBehaviour
 
     void UpdateObjective()
     {
+        StopCoroutine("TempObjectiveRoutine");
+
         if (collectedFuses < totalFuses)
         {
-            ObjectiveText.SetText(
-                $"Find fuses"
-            );
+            StartCoroutine(TempObjectiveRoutine("Find fuses", ObjectiveTextTime));
         }
         else
         {
@@ -84,6 +88,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator TempObjectiveRoutine(string msg, float time)
+    {
+        ObjectiveText.SetText(msg);
+        yield return new WaitForSeconds(time);
+        ObjectiveText.SetText("");
+    }
 
     public void InteractionTextUIChange(string newText)
     {
@@ -98,7 +108,6 @@ public class GameManager : MonoBehaviour
         InteractionTextUIChange("");
     }
 
-
     public void StartCutscene()
     {
         StartCoroutine(CutsceneRoutine());
@@ -108,11 +117,9 @@ public class GameManager : MonoBehaviour
     {
         IsCutscenePlaying = true;
 
-        // Turn off systems
         RandomEventManager.Instance.enabled = false;
         HorrorManager.Instance.enabled = false;
 
-        // Switch camera
         playerCam.gameObject.SetActive(false);
         cutsceneCam.gameObject.SetActive(true);
 
@@ -120,8 +127,6 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(7f);
 
-        //animation door closing and monster staring at you with some music 
         SceneManager.LoadScene("GameWon");
     }
-
 }

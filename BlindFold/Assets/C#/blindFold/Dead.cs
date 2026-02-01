@@ -10,6 +10,8 @@ public class Dead : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.IsCutscenePlaying) return;
+
         if (bloodObject != null && bloodObject.activeSelf)
         {
             timer += Time.deltaTime;

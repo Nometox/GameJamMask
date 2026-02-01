@@ -10,6 +10,11 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     public TMP_Text InteractionText;
     public TMP_Text ObjectiveText;
+    public Camera cutsceneCam;
+    public Camera playerCam;
+
+    public bool IsCutscenePlaying { get; private set; }
+
 
     [Header("Fuses")]
     public int totalFuses = 3;
@@ -96,6 +101,27 @@ public class GameManager : MonoBehaviour
 
     public void StartCutscene()
     {
-        SceneManager.LoadScene("Game");
+        StartCoroutine(CutsceneRoutine());
     }
+
+    IEnumerator CutsceneRoutine()
+    {
+        IsCutscenePlaying = true;
+
+        // Turn off systems
+        RandomEventManager.Instance.enabled = false;
+        HorrorManager.Instance.enabled = false;
+
+        // Switch camera
+        playerCam.gameObject.SetActive(false);
+        cutsceneCam.gameObject.SetActive(true);
+
+        ObjectiveText.SetText("You feel something watching you...");
+
+        yield return new WaitForSeconds(7f);
+
+        //animation door closing and monster staring at you with some music 
+        SceneManager.LoadScene("GameWon");
+    }
+
 }

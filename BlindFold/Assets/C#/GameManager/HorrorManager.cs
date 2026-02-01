@@ -23,6 +23,8 @@ public class HorrorManager : MonoBehaviour
     // CALL THIS
     public void PlayRandomScare()
     {
+        if (GameManager.Instance.IsCutscenePlaying) return;
+
         int scareIndex = Random.Range(0, jumpscares.Length);
         int soundIndex = Random.Range(0, scareSounds.Length);
 

@@ -36,6 +36,8 @@ public class RandomEventManager : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.IsCutscenePlaying) return;
+
         HandleFootstepIdleCheck();
     }
 
@@ -60,6 +62,12 @@ public class RandomEventManager : MonoBehaviour
         if (!GameManager.Instance.IsBlindfolded)
         {
             StartCoroutine(HeartbeatEvent());
+            // someone sitting on couch when craying dont look at him other wise you die
+        }
+        else
+        {
+            // Could add other events for not blindfolded state
+            // like change enviroment lightning
         }
     }
 
@@ -89,7 +97,6 @@ public class RandomEventManager : MonoBehaviour
         eventRunning = false;
     }
 
-    // ------------------ Footstep & Idle Death ------------------
 
     private void HandleFootstepIdleCheck()
     {
@@ -117,7 +124,6 @@ public class RandomEventManager : MonoBehaviour
     {
         eventRunning = true;
 
-        // ------------------ Footsteps ------------------
         if (footstepSounds.Length > 0)
         {
             int steps = Random.Range(2, 5);
@@ -137,7 +143,6 @@ public class RandomEventManager : MonoBehaviour
             }
         }
 
-        // ------------------ Check for death ------------------
         float deathTimer = 0f;
         while (deathTimer < timeAfterFootstepsBeforeDeath)
         {
